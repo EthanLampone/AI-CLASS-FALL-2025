@@ -8,20 +8,21 @@ If we started in land, it would be appended to the queue. Then, while the queue 
 up, down, right, and left. It then uses another "for" loop to check it new direction for either a "1" or a "0".
   - If there's no valid location, it gets ignored and not appended
 It will continue doing this in the two for loops at the beginning until there are no more "1"s to traverse through. It will then traverse through the rest of the grid and find any more
-islands.
+islands. 
 
 *** THIS IS HOW BFS WAS USED
 This code uses a BFS because of the use of "append" and "popleft" when getting each section of the grid. Below is the code:
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*** THIS IS THE CODE THAT I SUBMITTED ***
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
 
         from collections import deque ## ALLOW FOR USE OF QUEUES
 
-        m = len(grid) 
-        n = len(grid[0])
+        m = len(grid) # ROWS
+        n = len(grid[0]) # COLUMNS
         islands = 0
         queue = deque()
 
