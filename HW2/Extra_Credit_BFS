@@ -1,0 +1,50 @@
+This file is to show the Extra Credit for HW2. The selected problem I chose to complete was the BFS (Number of Islands). Below is the link to my screenshot:
+
+  - https://drive.google.com/file/d/1qGS6CfFxPpOpRohQwWAhzhutlb67Uutk/view?usp=drive_link
+
+*** THIS IS HOW I WENT ABOUT SOLVING THE PROBLEM ***
+To solve this problem, especially since a matrix is being used instead of a graph, I thought of ways to scan surrounding nodes for land if the node we currently were in was also land.
+If we started in land, it would be appended to the queue. Then, while the queue is not empty (at the start it won't be), it will .popleft() the current location and check the locations
+up, down, right, and left. It then uses another "for" loop to check it new direction for either a "1" or a "0".
+  - If there's no valid location, it gets ignored and not appended
+It will continue doing this in the two for loops at the beginning until there are no more "1"s to traverse through. It will then traverse through the rest of the grid and find any more
+islands.
+
+*** THIS IS HOW BFS WAS USED
+This code uses a BFS because of the use of "append" and "popleft" when getting each section of the grid. Below is the code:
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+
+        from collections import deque ## ALLOW FOR USE OF QUEUES
+
+        m = len(grid) 
+        n = len(grid[0])
+        islands = 0
+        queue = deque()
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == '1': ## IF THE SPOT WE ARE AT IS 1, CONTINUE
+                    islands += 1 ## AT AN ISLAND, ADD 1
+                    grid[i][j] = '0'
+                    queue.append((i,j))
+
+                    while queue: ## WHILE TH QUEUE OF SPOTS W/ '1' IS FULL
+                        row, col = queue.popleft() ## GET ROWS AND COLUMNS
+                        directions = [(1,0),(-1,0),(0,1),(0,-1)] ## 4 DIRECTIONS
+
+                        for x, y in directions: ## FOR EACH LEFT/RIGHT & UP/DOWN IN "directions"
+                            r, c = row + x, col + y ## GET ROWS AND COLUMNS TO RIGHT, LEFT, UP, & DOWN
+
+                            if (0 <= r < m and 0 <= c < n and grid[r][c] == '1'): ## SEE IF VALUE IS IN GRID AND '1'
+                                grid[r][c] = '0' ## MAKE THAT SPOT '0' SO PROGRAM DOESN'T GO BACK TO IT
+                                queue.append((r,c)) ## ADD SPOT TO QUEUE TO CONTINUE SEARCH
+
+        return islands
+        
+
+
+
