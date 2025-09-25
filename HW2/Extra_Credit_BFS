@@ -1,17 +1,19 @@
-This file is to show the Extra Credit for HW2. The selected problem I chose to complete was the BFS (Number of Islands). Below is the link to my screenshot:
+This file is to show the Extra Credit for HW2. The selected problem I chose to complete was the BFS (Number of Islands). While not the fastest, this is how I thought about it tackling the problem. Below is the link to my screenshot of timestamp, problem, etc:
 
   - https://drive.google.com/file/d/1qGS6CfFxPpOpRohQwWAhzhutlb67Uutk/view?usp=drive_link
 
 *** THIS IS HOW I WENT ABOUT SOLVING THE PROBLEM ***
+
 To solve this problem, especially since a matrix is being used instead of a graph, I thought of ways to scan surrounding nodes for land if the node we currently were in was also land.
-If we started in land, it would be appended to the queue. Then, while the queue is not empty (at the start it won't be), it will .popleft() the current location and check the locations
-up, down, right, and left. It then uses another "for" loop to check it new direction for either a "1" or a "0".
+If we started in land, it would be appended to the queue. Then, while the queue is not empty (at the start it won't be since we just appended it), it will .popleft() the current location (row and column) and check the locations
+up, down, right, and left. It then uses another "for" loop to check if new direction for either a "1" or a "0".
   - If there's no valid location, it gets ignored and not appended
-It will continue doing this in the two for loops at the beginning until there are no more "1"s to traverse through. It will then traverse through the rest of the grid and find any more
+It will continue doing this in the two "for" loops at the beginning until there are no more "1"s to traverse through. It will then traverse through the rest of the grid and find any more
 islands. 
 
 *** THIS IS HOW BFS WAS USED
-This code uses a BFS because of the use of "append" and "popleft" when getting each section of the grid. Below is the code:
+This code uses a BFS because of the use of "append" and "popleft" when getting each section of the grid. This complies with how a BFS works, in that the first position in the queue is the first position out. So for the code, you will see any valid spot 
+to the right will be checked first, since it will always be the first checked. Below is also the code:
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *** THIS IS THE CODE THAT I SUBMITTED ***
@@ -28,21 +30,21 @@ class Solution:
 
         for i in range(m):
             for j in range(n):
-                if grid[i][j] == '1': ## IF THE SPOT WE ARE AT IS 1, CONTINUE
-                    islands += 1 ## AT AN ISLAND, ADD 1
-                    grid[i][j] = '0'
-                    queue.append((i,j))
+                if grid[i][j] == '1': ## IF THE SPOT WE ARE AT IS 1
+                    islands += 1 ## AT AN ISLAND ('1'), ADD 1
+                    grid[i][j] = '0' ## CHANGE CURRENT ISLAND POSITION TO '0'
+                    queue.append((i,j)) ## ADD POSITION TO QUEUE
 
-                    while queue: ## WHILE TH QUEUE OF SPOTS W/ '1' IS FULL
-                        row, col = queue.popleft() ## GET ROWS AND COLUMNS
-                        directions = [(1,0),(-1,0),(0,1),(0,-1)] ## 4 DIRECTIONS
+                    while queue: ## WHILE THE QUEUE OF LAND POSITIONS IS NOT EMPTY
+                        row, col = queue.popleft() ## GET ROWS AND COLUMNS OF POSITION IN THE QUEUE
+                        directions = [(1,0),(-1,0),(0,1),(0,-1)] ## 4 DIRECTION LIST
 
-                        for x, y in directions: ## FOR EACH LEFT/RIGHT & UP/DOWN IN "directions"
+                        for x, y in directions: ## FOR EACH x,y IN "directions"
                             r, c = row + x, col + y ## GET ROWS AND COLUMNS TO RIGHT, LEFT, UP, & DOWN
 
-                            if (0 <= r < m and 0 <= c < n and grid[r][c] == '1'): ## SEE IF VALUE IS IN GRID AND '1'
+                            if (0 <= r < m and 0 <= c < n and grid[r][c] == '1'): ## SEE IF VALUE IS IN A VALID GRID LOCATION AND IF IT'S A '1'
                                 grid[r][c] = '0' ## MAKE THAT SPOT '0' SO PROGRAM DOESN'T GO BACK TO IT
-                                queue.append((r,c)) ## ADD SPOT TO QUEUE TO CONTINUE SEARCH
+                                queue.append((r,c)) ## ADD SPOT TO QUEUE TO CONTINUE SEARCH OF LAND
 
         return islands
         
