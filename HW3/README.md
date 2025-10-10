@@ -1,1 +1,1 @@
-# :wave: The Basics of GitHub 
+# Homework 3 ---
