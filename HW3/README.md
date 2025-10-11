@@ -54,4 +54,5 @@ This problem is basically using the same two programs from problem 1 and editing
     for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0), (1,1), (1,-1), (-1,1),(-1,-1)]:
       new_pos = (current_pos[0] + dx, current_pos[1] + dy)
   ```
+After these changes, and running 
 
