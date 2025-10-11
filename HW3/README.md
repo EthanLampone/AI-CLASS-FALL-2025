@@ -20,12 +20,14 @@ The starting position will be in the top-left corner and the goal position will 
   ```
 The change for g(n) and h(n) isn't necessary, but I did it to make that of the extra credit in the midterm review, and find it better for myself to view the different changes from cell to cell.
 After making these changes, the A* algorithm is all good to run. The path generated using it is below:
+
   <img width="655" height="652" alt="image" src="https://github.com/user-attachments/assets/a404f4a8-4325-4223-b3b3-d9ae62e5e34b" />
 
 The path, as expected, goes all the way down instead of going into the outcrop, taking into account both g(n) and h(n). We get a completely different path when we look at Greedy BFS.
 
 ## Greedy BFS --- h(n) exlcusive
 Greedy BFS only takes into account h(n) and not g(n). Like A* above, it utilizes the Manhatten Distance for h(n). With that being said, some changes to the **find_path** function needed to be made, since for A* it uses g(n). The biggest change is ensuring we don't visit cells that have already been seen and thus, disregarded. This is so we don't have an extrememly long path going up and down the maze when necessary.
+
 **ADD VISITED NODE AND INCLUDE EVERY POSITION**
   ```
     if current_pos in visited:
@@ -33,6 +35,7 @@ Greedy BFS only takes into account h(n) and not g(n). Like A* above, it utilizes
     visited.add(current_pos)
   ```
 This will ensure no previously visited node is visited more than once, to ensure a single long path.
+
   <img width="651" height="655" alt="image" src="https://github.com/user-attachments/assets/4cd43cc5-d5fc-4414-b90d-e653ec9bf8a4" />
 
 When just using h(n), the path will move according to the lowest value of h(n), disregarding walls until a wall is met. We can see this at the top of the maze, where the path goes until it gets to the hell in the upper inside corner, where h(n) = 40. However, the path gets met with a wall, so it must follow the next smallest h(n) value, which is down at h(n) = 50. It continues down 
