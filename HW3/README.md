@@ -1,6 +1,6 @@
-# Homework 3 ---
+# Homework 3 --- PROBLEM DESCRIPTIONS
 
-## Problem 1 ---> Modify "AStarMaze" for A* and Greedy BFS
+# Problem 1 ---> Modify "AStarMaze" for A* and Greedy BFS
 For this problem, and **Problem 2**, we are going to take one of the existing files from the course GitHub with a new maze similar to that of the images in the "Homework 3" assignment.
 I decided to use the same exact shape, but have the start and goal positions be on opposite sides of the barrier, to get some new paths different than that of the homework images. The maze structure is shown below:
 
@@ -58,11 +58,12 @@ This will ensure no previously visited node is visited more than once, to ensure
 
 When just using h(n), the path will move according to the lowest value of h(n), disregarding walls until a wall is met. We can see this at the top of the maze, where the path goes until it gets to the cell in the upper inside corner of the structure, where h(n) = 40. However, the path gets met with a wall, so it must follow the next smallest h(n) value, which is down at h(n) = 50. It continues down until it can't go down OR right, at which point it begins to move left. Then we see if syncs up to around where the **A*** algoirthm is and from there it's a similar path to the goal position.
 
-# Problem 2 ---> Utilizing Euclidean Distance for A*
+# Problem 2 ---> Utilizing Euclidean Distance 
 Now, this problem follows the same practice as **Problem 1**, but instead of using the Manhattan Distance for our heuristic we will use the Euclidean Distance. With using the Euclidean Distance, the values of h(n) for every cell will be different than those in the previous problem that used the Manhattan Distance, since they are two completely different functions. 
 
   - When multiplying the heuristic by 10, I would get long decimals. So for the Euclidean Distance heuristic, we won't multiply every value by 10. Just a heads up.
 
+## Euclidean Distance w/ A*
 We'll first look at the A* program and see what the Euclidean distance does to the pathfinding as a result. The same maze structure used in **Problem 1** will also be used for this problem. With the change in heuristic, there will be some code changes too. The code changes are below: 
 
 **CHANGE THE HEURISTIC FUNCTION**
@@ -82,7 +83,7 @@ After these changes have been made to the A* program, we can run and view the re
 
 From viewing the image, we can see the effect that using the Euclidean Distance has compared to that of the Manhattan Distance in **Problem 1**. We can clearly see where the diagonal moves come into effect. Instead of going straight down, the A* algorithm takes a couple diagonal moves in to the right, then a couple diagonal moves to the left once at the middle of the structure. Once at the bottom, it goes until reaching the far bottom-right side, goes up two diagonals, and then goes straight up to the goal position. So we can clearly see that using a different heuristic results in a slightly different path to the goal position.
 
-## Greedy BFS --> Utilizing Euclidean Distance for Greedy BFS
+## Euclidean Distance w/ Greedy BFS
 
 Now we will use the Euclidean Distance for the Greedy GFS. We will use the same code changes and use the code we used in **Problem 1** for **Greedy BFS**. When we run the program, we get the path below:
 
@@ -91,6 +92,8 @@ Now we will use the Euclidean Distance for the Greedy GFS. We will use the same 
 Now, from an immediate look, it's obvious that this is the worst path out of the four we have seen. There are twice as many cells in the path and it looks to be much longer than any of the previous three. While it may _look_ wrong, it is still correct. When using the Euclidean Distance AND **Greedy BFS**, we have twice as many cells to look at. Thus, there are twice as many cells that can qualify to have the lowest heristic value, and thus, be the next cell in hte P.Q after each cell. I will illustrate the path that was taken to show what happened, because there is a lot:
 
   <img width="652" height="653" alt="image" src="https://github.com/user-attachments/assets/491bdc5d-aad1-4abd-b6bd-5016205c8a22" />
+
+# Problem 3 ---> Different Weighted Versions of A*
 
 
 
