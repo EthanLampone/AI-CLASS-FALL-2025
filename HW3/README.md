@@ -96,7 +96,41 @@ Now, from an immediate look, it's obvious that this is the worst path out of the
 So, from these two experiments, we can declare that A* was the best with this given structure. For other's though, one algorithm may prove better than another.
 
 # Problem 3 ---> Different Weighted Versions of A*
+For **Problem 3**, we are tasked with explaining how different weights values of α and β affect the weighted version of A* below:
+
+  **f(n) = α * g(n) + β * h(n) , where α,β >= 0** 
+
+The results for different values of α and β are below:
+
+  α | β | Observed Behavior | 
+  --------------------------
+  1 | 0 | Strictly Dijkstra's algorithm.
+  --------------------------
+  0 | 1 | Strictly Greedy BFS algorithm.
+  --------------------------
+  1 | 1 | A* algorithm. Both α and β are even in cost, which means both will have an equal effect on each other.
+  --------------------------
+  2 | 1 | Both costs are > 0, but more of a Dijkstra's algorithm than an optimal A* algorithm.
+  --------------------------
+  1 | 2 | Both costs again are > 0, but with a higher β we have more of a Greedy BFS algorithm.
+  --------------------------
 
 
 
 
+
+
+
+# Problem 4 (Extra Credit) --> Path w/ Minimum Effort #1631
+I decided to take a stab at the extra credit for this homework assignment, and went with the first problem in which we needed to use Dijkstra’s Algorithm or A*.
+
+
+
+
+
+
+
+
+
+
+  
