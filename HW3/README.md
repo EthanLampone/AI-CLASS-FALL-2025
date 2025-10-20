@@ -115,7 +115,10 @@ The results for different values of α and β are below:
   1 | 2 | Both costs again are > 0, but with a higher β we have more of a Greedy BFS algorithm.
   --------------------------
 
+## Part B. ---> 
+Part B. wants us to look at how changing β for the heuristic value affects the algorithm. From running a couple values against a strict alpha value of α = 1, it's obvious that the path does not change if it were a strict Greedy BFS algorithm. The pictures of the path for values of β = 1, 2, and 3 are below, respectively.
 
+  
 
 
 
