@@ -27,11 +27,12 @@ class Solution:
               return effort
           
           for x, y in directions:
-              new_x, new_y = pos_x + x , pos_y + y
+              new_x, new_y = pos_x + x , pos_y + y # CREATE TWO NEW DIRECTIONS
 
               if 0 <= new_x < rows and 0 <= new_y < cols: # CHECK IF POSITION IS VALID (WE ARE IN A CELL)
                   new_effort = max(effort, abs(heights[new_x][new_y] - heights[pos_x][pos_y])) # GET NEW M
 
-                  if new_effort < efforts[new_x][new_y]:
-                      efforts[new_x][new_y] = new_effort
-                      pq.put((new_effort, new_x, new_y))_
+                  if new_effort < efforts[new_x][new_y]: # CHECK IF NEW EFFORT WE GOT IS LESS THAN THE EFFORT IN THE NEW POSITION FROM EFFORTS MATRIX
+                      efforts[new_x][new_y] = new_effort # ASSIGN THE EFFORT IN EFFORT MATRIX TO THE NEW EFFORT WE GOT
+                      pq.put((new_effort, new_x, new_y)) # ADD NEW EFFORT AND THE NEW POSITION TO P.Q.
+      return 0
