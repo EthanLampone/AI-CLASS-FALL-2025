@@ -122,7 +122,68 @@ The results for different values of α and β are below:
 
 
 # Problem 4 (Extra Credit) --> Path w/ Minimum Effort #1631
-I decided to take a stab at the extra credit for this homework assignment, and went with the first problem in which we needed to use Dijkstra’s Algorithm or A*.
+I decided to take a stab at the extra credit for this homework assignment, and went with the first problem in which we needed to use Dijkstra’s Algorithm or A*. For this problem, we are tasked with finding the **minimum** effort from the top-left cell to the bottom-right cell. To do this we use something similar to that of Dijkstra's Algorithm in which we take the absolute value of each effort from one cell to another, get the maximum effort, and then find the minimum effort out of all of them. And since the problem is only looking for the minimun effort, we don't need to track the path at all. We instead will make a new matrix, of the same dimension, and use that to find the minimum effort from one cell to another and return that value once we get to the goal node.
+
+The code begins with initializing everything we need:
+  - import the P.Q.
+  - get the rows and cols
+  - get start and goal position
+  - create effort matrix to track the minimum effort to get to each cell.
+  - directions list
+  - set the starting position to 0 (no effort needed)
+  - set the only value in the P.Q to be the starting position (0,0) and the starting effort (0)
+  - empty visited() set, to track cells that have already been visited (don't need to do this but I did)
+
+Now, while the P.Q is not empty (which it doesn't to begin with), all values will be popped into respective values:
+
+  - curr_effort = 0
+  - curr_pos = (0,0)
+
+We check two things after getting the next effort and position in the P.Q. We check if the position has already been visited and check to see if the current position is the goal position. If the cell has already been visited, we go to the next respective effort and position in the P.Q. If the goal positon has been reached, then we return the current effort we have, which will be the minimum effort to get from the starting position to the goal position.
+
+Now the _for_ loop. For each direction in the _directions_ list, we will get a new position. For my code, and from starting at the position node, the first position we will look at is (1,0), which is a valid position within the _heights_ matrix. We will then get a new effort, which is the absolute maximum effort between the two cells. Once we have this _new_effort_, we will see if it is less than the effort in the _efforts_ matrix in that respective cell at the current position in the _heights_ matrix. If it is, we replace the effort in that cell with the _new_effort_ we just got. We then do this for the other 3 directions and every cell in the _heights_ matrix until
+
+After going through every cell, we will return the current minimum effort, which will be the minimum effort for a certain path.
+
+  ```
+  class Solution:
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+
+        from queue import PriorityQueue
+        
+        rows, cols = len(heights), len(heights[0]) # NUMBER OF ROWS AND COLUMNS
+        start_pos, goal_pos = (0,0), (rows-1, cols-1) # START POSITION
+        directions = [(1,0), (-1,0), (0,1), (0,-1)] # CAN GO NORTH, SOUTH, EAST, OR WEST.
+
+        efforts = [[float('inf')] * cols for eff in range(rows)] # MAKE MATRIX, OF SAME DIMENSION, AND USE IT TO STORE EFFORTS (ALL INF TO BEGIN)
+        efforts[0][0] = 0 # SINCE WE START IN THE TOP LEFT CELL, THERE IS NO EFFORT. MAKE IT 0.
+
+        pq = PriorityQueue() # INITIALIZE THE PRIORITY QUEUE
+        pq.put((0, start_pos[0], start_pos[1])) # ADD THE CURRENT VALUE OF EFFORT AND THE X,Y OF THE CURRENT CELL;
+        visited = set()
+
+        while not pq.empty(): # WHILE P.Q NOT EMPTY
+
+            effort, pos_x, pos_y = pq.get() # GET THE VALUES
+            curr_pos = (pos_x, pos_y) # CONDENSE THE COORDINATES
+
+            if curr_pos in visited: # CHECK IF THE CURRENT POSITION HAS BEEN VISITED
+                continue
+            visited.add(curr_pos) # ADD POSITION TO VISITED
+
+            if pos_x == goal_pos[0] and pos_y == goal_pos[1]: # CHECK IF CURRENT POSITION IS THE GOAL POSITION
+                return effort
+            
+            for x, y in directions:
+                new_x, new_y = pos_x + x , pos_y + y
+
+                if 0 <= new_x < rows and 0 <= new_y < cols: # CHECK IF POSITION IS VALID (WE ARE IN A CELL)
+                    new_effort = max(effort, abs(heights[new_x][new_y] - heights[pos_x][pos_y])) # GET NEW M
+
+                    if new_effort < efforts[new_x][new_y]:
+                        efforts[new_x][new_y] = new_effort
+                        pq.put((new_effort, new_x, new_y))
+  ```
 
 
 
