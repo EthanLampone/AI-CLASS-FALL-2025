@@ -119,10 +119,14 @@ The results for different values of α and β are below:
 Part B. wants us to look at how changing β for the heuristic value affects the algorithm. From running a couple values against a strict alpha value of α = 1, it's obvious that the path does not change if it were a strict Greedy BFS algorithm. The pictures of the path for values of β = 1, 2, and 3 are below, respectively.
 
   
+  <img width="655" height="653" alt="image" src="https://github.com/user-attachments/assets/7f5602c5-c5ae-4081-994f-9ffba2a69dc7" />
+
+  <img width="649" height="650" alt="image" src="https://github.com/user-attachments/assets/17a1028a-4aab-4847-a801-29174e64eee2" />
+
+  <img width="656" height="646" alt="image" src="https://github.com/user-attachments/assets/cfa591fa-6b1e-4436-bb2b-f2479a992f8f" />
 
 
-
-
+From testing these three different values of β, we can see that there is no change in the path from if we simply use the same values of α and β. The heuristic values are just going to be multipled by the scalar value of β. Thus, the path will stay the same of β = 1 and α = 0.
 
 # Problem 4 (Extra Credit) --> Path w/ Minimum Effort #1631
 I decided to take a stab at the extra credit for this homework assignment, and went with the first problem in which we needed to use Dijkstra’s Algorithm or A*. For this problem, we are tasked with finding the **minimum** effort from the top-left cell to the bottom-right cell. To do this we use something similar to that of Dijkstra's Algorithm in which we take the absolute value of each effort from one cell to another, get the maximum effort, and then find the minimum effort out of all of them. And since the problem is only looking for the minimun effort, we don't need to track the path at all. We instead will make a new matrix, of the same dimension, and use that to find the minimum effort from one cell to another and return that value once we get to the goal node.
@@ -187,6 +191,10 @@ After going through every cell, we will return the current minimum effort, which
                         efforts[new_x][new_y] = new_effort
                         pq.put((new_effort, new_x, new_y))
   ```
+
+Submission acceptance below:
+
+  <img width="683" height="442" alt="image" src="https://github.com/user-attachments/assets/0c1c59c5-1cdd-4d16-a452-4068720650ad" />
 
 
 
