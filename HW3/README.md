@@ -118,7 +118,7 @@ The results for different values of α and β are below:
 ## Part B. ---> 
 Part B. wants us to look at how changing β for the heuristic value affects the algorithm. From running a couple values against a strict alpha value of α = 1, it's obvious that the path does not change if it were a strict Greedy BFS algorithm. The pictures of the path for values of β = 1, 2, and 3 are below, respectively.
 
-  ## β = 1
+  ## β = 1 (A* since α = β = 1)
   -----------------------------------------
   
   <img width="655" height="653" alt="image" src="https://github.com/user-attachments/assets/7f5602c5-c5ae-4081-994f-9ffba2a69dc7" />
