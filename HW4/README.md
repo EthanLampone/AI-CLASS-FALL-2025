@@ -1,1 +1,3 @@
-Contain future content for homework 4!
+# HOMEWORK 4 -- PROBLEM DESCRIPTIONS
+
+# PROBLEM 1 --> NIMA + ALGORITHMS
