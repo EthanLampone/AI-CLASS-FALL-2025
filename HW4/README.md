@@ -12,3 +12,7 @@ For **Problem 1**, we will talk about **Nim** and using the **Minimax** algorith
 
 **B. Game Tree:** Now that we know the rules of **Nim**, we can create a simple game tree. We will create a tree for a simple case of Nim, in which there are two heaps with containing three and four objects, respectively. The tree will show _all_ possible moves and each player's outcome. This game tree will look similar to the Tic-Tac-Toe example we were introduced to in class. While there are only two bins and less than five objects, this game tree will be very 
 
+
+## PROBLEM 2 --> OPTIMIZATION AND H() EVALUATION
+
+For Problem 2, we will be looking at potential different ways to optimize the **Minimax** algorithm AND develop a heuristic function to estimate the value of the game states in **Nim**. We will also 
