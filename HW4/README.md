@@ -19,9 +19,14 @@ You can see the many different ways that player 1 (who would go first) can begin
 **3. Minimax Algorithm** We now have our **Nim** game tree. We will now apply the **Minimax Algorithm** to our game tree. From the image above, we will cut the tree off at a depth of 2, since we are now dealing with a 2-ply game. Now comes applying the algorithm. I will be using a simple evaluation function:
   - 1 --> Winning Position for the current player
   - -1 --> Losing Position for the current player
-  - 0 --> Current Player wins.
+Below is a picture of the game tree with both 2-ply and the **Minimax Algorithm**:
 
-**4. Alpha-Beta Pruning** Now we will apply Alpha-Beta Pruning to reduce the number of nodes that need to be evaluated. Of course, we set Alpha and Beta initially to -inf & inf, respectively.
+  <img width="538" height="308" alt="image" src="https://github.com/user-attachments/assets/087ca887-a009-47d6-8fdd-8b561b793955" />
+
+From the image, we can see the values of each and every node of the game tree. Starting with depth 2, we go from left to right and see if this is either a winning/losing position for P1. If the number of objects is (0,0), then it will automatically be (-1), since this is stating P2 won. 
+
+
+**4. Alpha-Beta Pruning** Now we will apply Alpha-Beta Pruning to reduce the number of nodes that need to be evaluated. Of course, we set Alpha and Beta initially to -inf & inf, respectively. 
 
 **5. Analysis** After completing steps 1-4, we can come up with some analysis for the game of **Nim**. 
 
