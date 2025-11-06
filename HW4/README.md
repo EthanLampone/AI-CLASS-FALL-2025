@@ -17,24 +17,23 @@ For **Problem 1**, we will talk about **Nim** and using the **Minimax** algorith
 You can see the many different ways that player 1 (who would go first) can begin the game. He could take one or two objects from bin 1, and the same amounts from the other bin. After any of those four moves, player 2 has more than twice as many options to make (depending of course on what move player 1 makes prior). 
 
 **3. Minimax Algorithm** We now have our **Nim** game tree. We will now apply the **Minimax Algorithm** to our game tree. From the image above, we will cut the tree off at a depth of 2, since we are now dealing with a 2-ply game. Now comes applying the algorithm. I will be using a simple evaluation function:
-  - 1 --> Winning Position for the current player
-  - -1 --> Losing Position for the current player
+  - (+1) --> Winning Position for the current player
+  - (-1) --> Losing Position for the current player
 Below is a picture of the game tree with both 2-ply and the **Minimax Algorithm**:
 
   <img width="538" height="308" alt="image" src="https://github.com/user-attachments/assets/087ca887-a009-47d6-8fdd-8b561b793955" />
 
 From the image, we can see the values of each and every node of the game tree. Starting with depth 2, we go from left to right and see if this is either a winning/losing position for P1. If the number of objects is (0,0), then it will automatically be (-1), since this is stating P2 won. After we have the whole entire bottom layer assigned with their correct MV value, we then backtrack through the tree. From the bottom layer to the middle layer, we will be looking to see which value of all the child nodes is the **Min** of all the respective MV's. For the three left nodes connected to (1,2), the value that would go up is (-1). This would happen for the other three middle layer nodes. Then, when we do this for the root node, we will be looking for the **Max** value of the four MV values in the middle layer. This, from the picture, would be (-1). 
-This value of (-1) essentially means that Player 1 is ultimately in a losing position given the 2-ply cut off.
 
-**4. Alpha-Beta Pruning** Now we will apply Alpha-Beta Pruning to reduce the number of nodes that need to be evaluated. Of course, we set Alpha and Beta initially to -inf & inf, respectively. Then we will perform DFS starting from the root node. This will take us down to the node (0,2). It's MV value is (+1).
+This value of (-1) essentially means that Player 1 is ultimately in a losing position given the 2-ply cut off and respective starting number of bins and objects (2,2).
 
-**5. Analysis** After completing steps 1-4, we can come up with some analysis for the game of **Nim**. 
+**4. Alpha-Beta Pruning** Now we will apply Alpha-Beta Pruning to reduce the number of nodes that need to be evaluated. Of course, we set Alpha and Beta initially to -inf & inf, respectively. Then we will perform DFS starting from the root node. This will take us down to the node (0,2). It's MV value is (+1). We evaluate this value by bringing it up to the parent node to be evaluated. Since we the middle layer is a **Min** layer, we will look to see if α >= β^ANC. α = (+1), which is what we just brought up for evaluation. And β^ANC = inf. Thus, the expression (+1) >= inf is clearly not true. This means we will continue with evaluating all of the child nodes below. We'll look at the last two nodes. The next value, (-1), is then brought up for evaluation. The model will look to see if this value is smaller than the current value (+1). Seeing as this is true, we replace (+1) with (-1). The ne
 
-Below is the 2-Ply Game Tree above with the Minimax Algorithm applied:
-
-
-
+**5. Analysis** After completing steps 1-4, we can come up with some analysis for the game of **Nim**. The game itself is very easy to play, and with a bunch of practice can easily be mastered to win no matter what a persons situation may be. For the example that I used, it was clear that the player going first would be unable to win no matter what. Seeing as the other player also plays every move optimally, there is a 0% chance Player one can win _no matter what move they make in the beginning of the game_. If we changed the number of objects in the each heap, (3,3) for example, we could maybe find some ways for Player 1 to actually have a change of winning. The same goes for increasing the number of heaps (2,2,2). 
+The **Minimax Algorithm** and **Alpha-Beta Pruning** showed us truly how Player 2 has a better chance 
 
 ## PROBLEM 2 --> OPTIMIZATION AND H() EVALUATION
 
-For Problem 2, we will be looking at potential different ways to optimize the **Minimax** algorithm AND develop a heuristic function to estimate the value of the game states in **Nim**. We will also 
+For Problem 2, we will be looking at potential different ways to optimize the **Minimax** algorithm AND develop a heuristic function to estimate the value of the game states in **Nim**. 
+
+**1. Optimization Techniques** For this 
