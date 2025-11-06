@@ -35,7 +35,7 @@ The image to the pruned game tree w/ **Minimax Algorithm** is below:
 
   <img width="837" height="390" alt="image" src="https://github.com/user-attachments/assets/9f6a7dcd-25ea-406a-bd86-cdf934aec0fc" />
 
-We can see that the last two nodes got prunned off, since the MV value that was brought up as β was equal to the α^ANC. 
+We can see that the last two nodes got "prunned" off, since the MV value that was brought up as β was equal to the α^ANC. 
 
 **5. Analysis** After completing steps 1-4, we can come up with some analysis for the game of **Nim**. The game itself is very easy to play, and with a bunch of practice can easily be mastered to win no matter what a persons situation may be. For the example that I used, it was clear that the player going first would be unable to win no matter what. Seeing as the other player also plays every move optimally, there is a 0% chance Player one can win _no matter what move they make in the beginning of the game_. If we changed the number of objects in the each heap, (3,3) for example, we could maybe find some ways for Player 1 to actually have a change of winning. The same goes for increasing the number of heaps (2,2,2). 
 The **Minimax Algorithm** and **Alpha-Beta Pruning** showed us truly how Player 2 has a better chance, if playing optimally, can guarantee a win no matter what move Player 1 does first
@@ -48,4 +48,8 @@ For Problem 2, we will be looking at potential different ways to optimize the **
 
 
 
-Now, we can see that even for a 2-ply game tree, there are still _a lot_ more moves that can be made farther down the tree. But, for 2-ply, this will do. However, there are still 
+Now, we can see that even for a 2-ply game tree, there are still _a lot_ more moves that can be made farther down the tree. But, for 2-ply, this will do. However, if we use iterative deepening (depth = 1, 2, ..., k), we can see that at certain depths, Player 1 has a positive outlook within the game. An prime example is depth 1. If we look at each of the 5 possible moves Player 1 can make, we see that 4 
+
+**2. Heuristic Evaluation** The last part we will look at doing is creating a new evaluation function for the game states in yet another 2-ply game. For this we need to think about how the many states in a **Nim** game tree can be evaluated. My thinking was collecting all of the winning possible moves and subtracting them from the total number of losing moves a player could make (similar to Tic-Tac_Toe in the lecture). The 2-ply game tree with the new MV values using the _new_ evaluation values is below:
+
+  
