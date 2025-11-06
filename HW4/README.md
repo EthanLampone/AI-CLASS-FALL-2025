@@ -46,10 +46,12 @@ For Problem 2, we will be looking at potential different ways to optimize the **
 
 **1. Optimization Techniques** Iterative Deepening can be used on larger game trees to try and find the best sequene of moves Player 1 can make since they always go first. For this problem I will use a game tree that is big, but not _too_ big in the sense of 2-ply. We'll use (2,1,2). The 2-ply game tree for this particular game is below:
 
+  ... # INSERT GAME TREE HERE BEFORE SUBMISSION
 
+Now, we can see that even for a 2-ply game tree, there are still _a lot_ more moves that can be made farther down the tree. But, for 2-ply, this will do. However, if we use iterative deepening (depth = 1, 2, ..., k), we can see that at certain depths there are key positions in which Player 1 An prime example is depth 1. If we look at each of the 5 possible moves Player 1 can make, we see that 4 
 
-Now, we can see that even for a 2-ply game tree, there are still _a lot_ more moves that can be made farther down the tree. But, for 2-ply, this will do. However, if we use iterative deepening (depth = 1, 2, ..., k), we can see that at certain depths, Player 1 has a positive outlook within the game. An prime example is depth 1. If we look at each of the 5 possible moves Player 1 can make, we see that 4 
+**2. Heuristic Evaluation** The last part we will look at doing is creating a new evaluation function for the game states in yet another 2-ply game. For this we need to think about how the many states in a **Nim** game tree can be evaluated. My thinking was collecting all of the winning possible moves and subtracting them from the total number of losing moves a player could make (similar to Tic-Tac_Toe in the lecture). The 2-ply game tree with the new MV values using the _new_ evaluation values is below ((0,0) will result in -1 because that indicates Player 2 wins):
 
-**2. Heuristic Evaluation** The last part we will look at doing is creating a new evaluation function for the game states in yet another 2-ply game. For this we need to think about how the many states in a **Nim** game tree can be evaluated. My thinking was collecting all of the winning possible moves and subtracting them from the total number of losing moves a player could make (similar to Tic-Tac_Toe in the lecture). The 2-ply game tree with the new MV values using the _new_ evaluation values is below:
+  ...
 
-  
+From the original **Minimax Algorithm Game Tree**, we see that we get the same result for this specific game tree with the original # of heaps and objects per heap when we use a different evaluation function for the MV values. This can mean that this evaluation function can correctly predict if Player 1 has a positive or negative advantage over Player 2 similar to just a standard **Minimax Algorithm** of (+1) and (-1) in a 2-Ply game. 
