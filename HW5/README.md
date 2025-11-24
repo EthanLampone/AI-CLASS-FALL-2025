@@ -8,4 +8,11 @@ CSC 362 - AI
 
 # HOMEWORK 5 --- DESCRIPTION DETAILS
 
+## PART 1 --> The Exploration-Exploitation Trade-Off (Epislon Decay)
+
+
 ....
+
+
+## PART 2 --> The Planning Horizon
+
