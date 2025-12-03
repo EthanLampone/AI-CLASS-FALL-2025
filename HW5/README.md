@@ -21,14 +21,14 @@ To  begin Part I, we need to explore the **.py** file and find where we will foc
 As we can see, we have the following hyperparameters that we will primarily focus on for this assignment:
   - **Gamma (Discount Factor)**
   - **Learning Rate (Alpha)**
-  - **Epislon Start**
+  - **Epsilon Start**
   - **Epsilon End**
   - **Epsilon Decay**
 
 To begin, we are going to tweak the value(s) of **Epsilon Decay** to see the effects different values have on the car and its exploration/exploitation. We are also going to lock all the other values to their default, which are below:
   - **Gamma (Discount Factor)** --> 0.99
   - **Learning Rate (Alpha)** --> 0.0005
-  - **Epislon Start** --> 1.0
+  - **Epsilon Start** --> 1.0
   - **Epsilon End** --> 0.2
   - **Epsilon Decay** --> 5000 **PRESET VALUE!!!!!!!!!**
 
@@ -36,7 +36,19 @@ For Part I, we are asked to do the following:
 
   <img width="592" height="265" alt="image" src="https://github.com/user-attachments/assets/08fdf4a4-174e-4bda-bac4-650b45c5eafa" />
 
+We should be using three different values for **Epsilon-Decay Rate**. One should be very high, one should be very low, and one should be in the middle. The expected outcomes from using these three values are explained below, respectively:
+
+  <img width="808" height="437" alt="image" src="https://github.com/user-attachments/assets/05441fdc-a41f-403d-af48-1ec7780605db" />
+
+With that being said, lets first look at the high **Epsilon-Decay Value**:
+
+  
+
+
+
+
 
 
 ## PART 2 --> The Planning Horizon
 
+After looking at the many different effects varying epsilon values have, 
