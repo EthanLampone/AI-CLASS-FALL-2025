@@ -557,6 +557,8 @@ def run_visualizer():
     success_count = 0 
     log_lines = [initial_log_message] 
 
+    all_episode_rewards = [] ## ADDED TO KEEP TRACK OF REWARDS ******
+
     running = True
     
     clock = pygame.time.Clock()
@@ -628,6 +630,9 @@ def run_visualizer():
             
             # 7. Prepare the single log message (Move/Outcome)
             if done:
+
+                all_episode_rewards.append(total_reward)
+
                 if reward > 10:
                     move_log = "🎉 **GOAL REACHED!**"
                     success_count += 1
@@ -647,6 +652,10 @@ def run_visualizer():
                 # Only stop if in training mode (not exploiting a finished model)
                 if success_count >= SUCCESS_THRESHOLD and not is_trained: 
                     print(f"Reached {SUCCESS_THRESHOLD} goals! Saving model and stopping.")
+
+                    np.savetxt("trained_rewards.csv", all_episode_rewards, delimiter=",")
+                    print("Rewards saved to 'training_reards.csv'")
+
                     if agent.save_model(agent.MODEL_PATH):
                         print(f"Model saved successfully to {agent.MODEL_PATH}.")
                     running = False # Stop the main loop
