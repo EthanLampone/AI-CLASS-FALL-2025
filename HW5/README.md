@@ -26,6 +26,7 @@ As we can see, we have the following hyperparameters that we will primarily focu
   - **Epsilon Start**
   - **Epsilon End**
   - **Epsilon Decay**
+
 To begin, we are going to tweak the value(s) of **Epsilon Decay** to see the effects different values have on the car and its exploration/exploitation. We are also going to lock all the other values to their default, which are below:
 
   - **Gamma (Discount Factor)** --> 0.99
@@ -44,7 +45,7 @@ We should be using three different values for **Epsilon-Decay Rate**. One should
 
 With that being said, lets first look at the high **Epsilon-Decay Value**:
 
-  ...
+  For this experiment, we need to change the **Epsilon-Decay** value to something
 
 Now we can look at the low **Epsilon-Decay Value**:
 
