@@ -10,6 +10,7 @@ import pygame
 import sys
 import math
 import os 
+import csv ## NEW ADDITION FOR CSV EXPORT ****
 
 # Define a named tuple for experience transitions
 Transition = namedtuple('Transition', ('state', 'action', 'reward', 'next_state', 'done'))
@@ -530,8 +531,8 @@ TARGET_UPDATE_FREQ = 100   # Update target network more frequently
 
 # Epsilon-Greedy Parameters (Controls Exploration vs. Exploitation)
 EPS_START = 1.0            # Initial chance of random exploration
-EPS_END = 0.20             # MINIMUM EPSILON to force exploration!
-EPS_DECAY = 5000           # Keeping this aggressive decay value as requested
+EPS_END = 0.01           # MINIMUM EPSILON to force exploration!
+EPS_DECAY = 100           # Keeping this aggressive decay value as requested
 
 # New Automatic Stop Parameter
 SUCCESS_THRESHOLD = 10 
@@ -554,6 +555,10 @@ def run_visualizer():
     done = False
     episode_count = 1
     total_reward = 0
+
+    episode_rewards = []
+    REWARD_FILE = 'car_dqn_rewards.csv'
+
     success_count = 0 
     log_lines = [initial_log_message] 
 
@@ -562,7 +567,7 @@ def run_visualizer():
     clock = pygame.time.Clock()
     
     # --- KEY CHANGE: INCREASED FPS FOR FASTER REAL-TIME TRAINING ---
-    FPS = 100 
+    FPS = 250 
 
     while running:
         for event in pygame.event.get():
@@ -572,6 +577,8 @@ def run_visualizer():
                     print(f"Model saved successfully to {agent.MODEL_PATH}.")
                 else:
                     print("Model could not be saved.")
+
+                write_rewards_to_csv(REWARD_FILE, episode_rewards)
                 running = False
                 
             if event.type == pygame.KEYDOWN:
@@ -586,6 +593,8 @@ def run_visualizer():
                     is_trained = False # Ensure training mode restarts
                     log_lines = ["Game Reset. Starting fresh training session."]
         
+                    episode_rewards = []
+
         # --- Autonomous Stepping Logic ---
         
         # Epsilon decay calculation (Always use the full calculation now!)
@@ -645,10 +654,14 @@ def run_visualizer():
             if done:
                 # --- Auto-Stop Logic ---
                 # Only stop if in training mode (not exploiting a finished model)
+
+                episode_rewards.append(total_reward)
+
                 if success_count >= SUCCESS_THRESHOLD and not is_trained: 
                     print(f"Reached {SUCCESS_THRESHOLD} goals! Saving model and stopping.")
                     if agent.save_model(agent.MODEL_PATH):
                         print(f"Model saved successfully to {agent.MODEL_PATH}.")
+                    write_rewards_to_csv(REWARD_FILE, episode_rewards)
                     running = False # Stop the main loop
                     
                 # Reset environment for a new episode (if not stopping)
@@ -669,6 +682,21 @@ def run_visualizer():
 
     pygame.quit()
     sys.exit()
+
+
+def write_rewards_to_csv(filename, episode_rewards):
+    "GET LIST OF REWARDS --> CSV"
+    try:
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Episode','Reward'])
+
+            # WRITE EPISODE INDEX (STARTING AT 1) AND THE TOTAL REWARD
+            for i, reward in enumerate(episode_rewards):
+                writer.writerow([i + 1, reward])
+        print(f"Episode rewards saved to {filename}")
+    except Exception as e:
+        print(f"Error saving rewards to CSV: {e}")
 
 if __name__ == "__main__":
     run_visualizer()

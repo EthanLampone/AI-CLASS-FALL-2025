@@ -1,43 +1,39 @@
-## ETHAN LAMPONE
-## 9 DECEMBER 2025
-## PLOT AVERAGE REWARDS
-
+import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd # Needed for moving average calculation
 
-def plot_moving_average_reward(filename, window_size=50):
+def plot_rewards(filename='car_dqn_rewards.csv', window_size=50):
     """
-    Loads raw episode rewards and plots the N-episode moving average.
+    Loads episode rewards from a CSV, calculates a moving average, and plots them.
     """
-    # 1. Load the data
     try:
-        rewards = np.loadtxt(filename, delimiter=",")
-    except OSError:
-        print(f"File {filename} not found. Run the game first!")
-        return
+        # Load the data
+        df = pd.read_csv(filename)
+        
+        # Calculate Moving Average (to smooth the curve and show the trend)
+        df['Moving Average'] = df['Reward'].rolling(window=window_size).mean()
 
-    # 2. Calculate the Moving Average
-    # This is the "Average Reward per Episode" over the last 'window_size' episodes.
-    series = pd.Series(rewards)
-    # The '.rolling(window=window_size).mean()' function computes the rolling average.
-    moving_avg = series.rolling(window=window_size).mean()
+        plt.figure(figsize=(12, 6))
+        
+        # Plot the raw episode rewards (in lighter color)
+        plt.plot(df['Episode'], df['Reward'], color='gray', alpha=0.4, label='Raw Episode Reward')
+        
+        # Plot the moving average (main trend line)
+        plt.plot(df['Episode'], df['Moving Average'], color='blue', linewidth=2, 
+                 label=f'Moving Average (Window={window_size})')
+        
+        plt.title('DQN Car Driving Agent Learning Progress 🚗', fontsize=16)
+        plt.xlabel('Episode', fontsize=14)
+        plt.ylabel('Total Reward per Episode', fontsize=14)
+        plt.grid(True, linestyle='--', alpha=0.6)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
 
-    # 3. Plotting
-    plt.figure(figsize=(10, 6))
-    
-    # Plot raw data (faint background)
-    plt.plot(rewards, alpha=0.3, color='gray', label='Raw Episode Reward')
-    
-    # Plot the Moving Average (the smoothed curve)
-    plt.plot(moving_avg, color='blue', linewidth=3, label=f'Average Reward ({window_size}-Episode Moving Window)')
+    except FileNotFoundError:
+        print(f"Error: Reward file '{filename}' not found. Run the training first!")
+    except Exception as e:
+        print(f"An error occurred during plotting: {e}")
 
-    plt.title('Agent Training Performance: Average Reward per Episode')
-    plt.xlabel('Episode')
-    plt.ylabel(f'Average Total Reward (over {window_size} episodes)')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    plt.show()
-
-# Example usage:
-plot_moving_average_reward("trained_rewards.csv", window_size=50)
+# Call the function to generate the plot
+if __name__ == "__main__":
+    plot_rewards()
